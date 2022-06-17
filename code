@@ -1,0 +1,128 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+
+import time
+
+import pynput
+from pynput import keyboard
+from pynput.keyboard import Key, Controller
+keyboard = Controller()
+
+
+option = webdriver.ChromeOptions()
+#Removes navigator.webdriver flag
+
+# For older ChromeDriver under version 79.0.3945.16
+option.add_experimental_option("excludeSwitches", ["enable-automation"])
+option.add_experimental_option('useAutomationExtension', False)
+
+#For ChromeDriver version 79.0.3945.16 or over
+option.add_argument('--disable-blink-features=AutomationControlled')
+
+
+driver = webdriver.Chrome(executable_path= "/Users/angie/Documents/snake/chromedriver", options=option)
+driver.get("https://www.depop.com/angieisontop")
+
+accept_cookies = driver.find_element_by_xpath('//*[@id="__next"]/div/div[2]/button[2]')
+accept_cookies.click()
+
+time.sleep(3)
+
+# login_button = driver.find_element_by_xpath('//*[@id="mainNavigation"]/li[3]/a')
+# login_button.click()
+
+
+time.sleep(3)
+
+input_address = driver.find_element_by_xpath('//*[@id="username"]')
+input_address.send_keys('ENTER USER')
+
+time.sleep(3)
+
+input_password = driver.find_element_by_xpath('//*[@id="password"]')
+input_password.send_keys("ENTER PASSWORD")
+
+time.sleep(3)
+
+login_button_2 = driver.find_element_by_xpath('//*[@id="main"]/div[1]/form/button')
+login_button_2.click()
+
+time.sleep(4)
+
+# covid = driver.find_element_by_xpath('//*[@id="__next"]/div[1]/div/button')
+# covid.click()
+# time.sleep(8)
+
+for i in range(250):
+
+    # SCROLL_PAUSE_TIME = 3
+    # # Get scroll height
+    # last_height = driver.execute_script("return document.body.scrollHeight")
+    #
+    # while True:
+    #     # Scroll down to bottom
+    #     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    #
+    #     # Wait to load page
+    #     time.sleep(SCROLL_PAUSE_TIME)
+    #
+    #     # Calculate new scroll height and compare with last scroll height
+    #     new_height = driver.execute_script("return document.body.scrollHeight")
+    #     if new_height == last_height:
+    #         break
+    #     last_height = new_height
+    #
+    # time.sleep(3)
+
+    # elements = driver.find_elements_by_xpath('// *[ @ id = "products-tab"] / div / ul / li')
+    # elements[5].click()
+    # time.sleep(8)
+
+    elements = driver.find_elements_by_xpath('// *[ @ id = "products-tab"] / div / ul / li')
+    last_item = elements[5]
+    driver.execute_script("arguments[0].scrollIntoView();", last_item)
+    time.sleep(2)
+    elements[8].click()
+    time.sleep(8)
+
+    edit_scroll = driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[3]/div/div[2]/div/table/tbody/tr[4]/td')
+    driver.execute_script("arguments[0].scrollIntoView();", edit_scroll)
+    time.sleep(8)
+
+    edit_button = driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[3]/div/div[3]/div/a[1]') 
+    edit_button.click()
+    time.sleep(8)
+
+
+    SCROLL_PAUSE_TIME = 3
+    # Get scroll height
+    last_height = driver.execute_script("return document.body.scrollHeight")
+
+    while True:
+        # Scroll down to bottom
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+        # Wait to load page
+        time.sleep(SCROLL_PAUSE_TIME)
+
+        # Calculate new scroll height and compare with last scroll height
+        new_height = driver.execute_script("return document.body.scrollHeight")
+        if new_height == last_height:
+            break
+        last_height = new_height
+
+    world_ship = driver.find_element_by_xpath('// *[ @ id = "main"] / form / fieldset[7] / div / label / span')
+    world_ship.click()
+    time.sleep(8)
+    world_ship.click()
+    time.sleep(8)
+
+    save_changes = driver.find_element_by_xpath('//*[@id="main"]/form/div[2]/button[1]')
+    save_changes.click()
+    time.sleep(8)
+
+    angieisontop = driver.find_element_by_xpath('//*[@id="main"]/div[1]/div[3]/div/div[1]/div[1]/div[1]/div/a')
+    angieisontop.click()
+    time.sleep(8)
+
